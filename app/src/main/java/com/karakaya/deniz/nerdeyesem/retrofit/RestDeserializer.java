@@ -1,4 +1,4 @@
-package com.karakaya.deniz.nerdeyesem;
+package com.karakaya.deniz.nerdeyesem.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
@@ -13,7 +13,7 @@ public class RestDeserializer<T> implements JsonDeserializer<T> {
     private Class<T> mClass;
     private String mKey;
 
-    public RestDeserializer(Class<T> targetClass, String key) {
+    RestDeserializer(Class<T> targetClass, String key) {
         mClass = targetClass;
         mKey = key;
     }
