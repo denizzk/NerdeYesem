@@ -18,7 +18,8 @@ public class ApiClient {
         if (retrofit == null) {
             Gson gson =
                     new GsonBuilder()
-                            .registerTypeAdapter(Restaurant.class, new RestDeserializer<>(Restaurant.class, "restaurant"))
+                            .registerTypeAdapter(Restaurant.class, new RestDeserializer<>
+                                    (Restaurant.class, "restaurant"))
                             .create();
 
             retrofit = new Retrofit.Builder()

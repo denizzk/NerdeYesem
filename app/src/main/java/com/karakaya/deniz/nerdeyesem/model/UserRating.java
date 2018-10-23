@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserRating {
+
     @SerializedName("aggregate_rating")
     @Expose
     private String aggregateRating;
