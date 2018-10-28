@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10sp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginRight="10sp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/SubtitleText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soner Efe" />
+
+
+            <TextView
+                android:id="@+id/user_level"
+                style="@style/SubnormalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foodie"
+                android:textColor="@color/green" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5sp">
+
+        <TextView
+            android:id="@+id/user_review_date"
+            style="@style/SubnormalText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="90"
+            android:text="2 months ago"
+            android:textColor="@color/pale"/>
+
+
+        <TextView
+            style="@style/SubnormalText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="RATED"
+            android:textColor="@color/pale" />
+
+
+        <TextView
+            android:id="@+id/user_review_rating"
+            style="@style/SubnormalText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:paddingRight="3sp"
+            android:paddingLeft="3sp"
+            android:text="3.8"
+            android:textColor="#FFF" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/user_comment"
+        style="@style/SubnormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="10"
+        android:text="1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY 1 5th Avenue, New York, NY " />
+
+</LinearLayout>
