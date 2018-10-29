@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import com.karakaya.deniz.nerdeyesem.Common;
 import com.karakaya.deniz.nerdeyesem.R;
 import com.karakaya.deniz.nerdeyesem.adapter.RestaurantRecyclerViewAdapter;
-import com.karakaya.deniz.nerdeyesem.model.Search;
 import com.karakaya.deniz.nerdeyesem.retrofit.ApiClient;
 import com.karakaya.deniz.nerdeyesem.retrofit.RestInterface;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -26,9 +25,7 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,12 +37,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-//    private LocationManager locationManager;
-//    private LocationListener locationListener;
-
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    Common common=new Common();
+    Common common = new Common();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +82,17 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 //        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-                moveTaskToBack(true);
-                finish();
-            }
+            moveTaskToBack(true);
+            finish();
+        }
 //        }
     }
 

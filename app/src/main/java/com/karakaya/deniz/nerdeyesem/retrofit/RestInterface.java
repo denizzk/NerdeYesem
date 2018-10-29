@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -16,24 +15,33 @@ import retrofit2.http.Query;
 
 public interface RestInterface {
     @Headers("Content-Type: application/json")
-    @GET("api/v2.1/search") @CustomGson
+    @GET("api/v2.1/search")
+    @RestaurantGson
     Observable<Search> getSearch(@Header("user-key") String userKey, @Query("lat") Double latitude,
                                  @Query("lon") Double longitude, @Query("sort") String sortBy,
                                  @Query("count") int count);
 
     @Headers("Content-Type: application/json")
-    @GET("api/v2.1/restaurant") @GenericGson
+    @GET("api/v2.1/restaurant")
+    @GenericGson
     Observable<Restaurant> getRestaurant(@Header("user-key") String userKey, @Query("res_id") int
             restaurantId);
 
     @Headers("Content-Type: application/json")
-    @GET("api/v2.1/reviews") @CustomGson2
+    @GET("api/v2.1/reviews")
+    @ReviewGson
     Observable<ReviewRepo> getReviewRepo(@Header("user-key") String userKey, @Query("res_id") int
             restaurantId);
 }
+
 @Retention(RetentionPolicy.RUNTIME)
-@interface CustomGson{}
+@interface RestaurantGson {
+}
+
 @Retention(RetentionPolicy.RUNTIME)
-@interface GenericGson{}
+@interface GenericGson {
+}
+
 @Retention(RetentionPolicy.RUNTIME)
-@interface CustomGson2{}
+@interface ReviewGson {
+}

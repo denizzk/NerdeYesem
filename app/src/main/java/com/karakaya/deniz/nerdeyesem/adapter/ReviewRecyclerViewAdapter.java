@@ -1,7 +1,9 @@
 package com.karakaya.deniz.nerdeyesem.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,6 +94,11 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
                     .into(holder.userImage);
         }
         holder.userName.setText(mUserNames.get(position));
+        holder.userName.setOnClickListener(v -> {
+            Intent intent =  new Intent("android.intent.action.VIEW",
+                    Uri.parse(mUserProfileUrls.get(position)));
+            mContext.startActivity(intent);
+        });
         holder.userLevel.setText(mUserLevels.get(position));
         holder.userLevel.setTextColor(Color.parseColor("#" + mUserLevelColors
                 .get(position)));

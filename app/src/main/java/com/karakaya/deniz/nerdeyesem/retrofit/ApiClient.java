@@ -35,20 +35,20 @@ public class ApiClient {
     }
 
     static class GenericOrCustomGsonConverterFactory extends Converter.Factory {
-        Gson gson =
+        Gson gsonRestaurant =
                 new GsonBuilder()
                         .registerTypeAdapter(Restaurant.class, new RestDeserializer<>
                                 (Restaurant.class, "restaurant"))
                         .create();
-        Gson gson2 =
+        Gson gsonReview =
                 new GsonBuilder()
                         .registerTypeAdapter(Review.class, new RestDeserializer<>
                                 (Review.class, "review"))
                         .create();
 
         final Converter.Factory generic = GsonConverterFactory.create();
-        final Converter.Factory custom = GsonConverterFactory.create(gson);
-        final Converter.Factory custom2 = GsonConverterFactory.create(gson2);
+        final Converter.Factory restaurant = GsonConverterFactory.create(gsonRestaurant);
+        final Converter.Factory review = GsonConverterFactory.create(gsonReview);
 
         @Override
         public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[]
@@ -57,11 +57,11 @@ public class ApiClient {
                 if (annotation.annotationType() == GenericGson.class) {
                     return generic.responseBodyConverter(type, annotations, retrofit);
                 }
-                if (annotation.annotationType() == CustomGson.class) {
-                    return custom.responseBodyConverter(type, annotations, retrofit);
+                if (annotation.annotationType() == RestaurantGson.class) {
+                    return restaurant.responseBodyConverter(type, annotations, retrofit);
                 }
-                if (annotation.annotationType() == CustomGson2.class) {
-                    return custom2.responseBodyConverter(type, annotations, retrofit);
+                if (annotation.annotationType() == ReviewGson.class) {
+                    return review.responseBodyConverter(type, annotations, retrofit);
                 }
             }
             return null;

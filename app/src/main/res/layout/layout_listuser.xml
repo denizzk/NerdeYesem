@@ -30,6 +30,9 @@
                 style="@style/SubtitleText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
                 android:text="Soner Efe" />
 
 
