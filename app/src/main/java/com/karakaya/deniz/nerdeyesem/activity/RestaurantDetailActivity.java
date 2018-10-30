@@ -1,7 +1,5 @@
 package com.karakaya.deniz.nerdeyesem.activity;
 
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -10,22 +8,19 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.karakaya.deniz.nerdeyesem.Common;
+import com.karakaya.deniz.nerdeyesem.helper.Common;
 import com.karakaya.deniz.nerdeyesem.R;
 import com.karakaya.deniz.nerdeyesem.adapter.ReviewRecyclerViewAdapter;
 import com.karakaya.deniz.nerdeyesem.retrofit.ApiClient;
@@ -53,9 +48,11 @@ public class RestaurantDetailActivity extends AppCompatActivity {
             restaurantIsOpenNow, restaurantVoteCount, restaurantCuisine, restaurantAvgCost,
             restaurantAddress, restaurantReviewCount;
     LinearLayout restaurantWebsiteButton, restaurantShowOnMap, restaurantReviews;
-    ImageView restaurantImage, restaurantHasOnlineDelivery, restaurantHasTableReservation;
+    ImageView restaurantImage, restaurantHasOnlineDelivery, restaurantHasTableReservation,
+            restaurantHasOpentableSupport;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
+    Toolbar toolbar;
 
     int restaurantId;
     String name;
@@ -66,7 +63,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp,
                 null));
         toolbar.setNavigationOnClickListener(v -> {
@@ -116,6 +113,25 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(restaurant -> {
+
+                    toolbar.inflateMenu(R.menu.main);
+                    toolbar.getMenu().findItem(R.id.action_share).setIcon(R.drawable
+                            .ic_share_black_24dp);
+                    toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            sharingIntent.setType("text/plain");
+                            String shareBody = restaurant.getDeeplink();
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject" +
+                                    " Here");
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+                            return true;
+                        }
+                    });
+
                     appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
                         if (Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
                             // Collapsed
@@ -126,14 +142,15 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                         }
                     });
 
-                    if (restaurant.getFeaturedImage() != null) {
-                        Glide.with(getBaseContext())
+                    if (!restaurant.getFeaturedImage().equals("")) {
+                        Glide.with(this)
+                                .asBitmap()
                                 .load(restaurant.getFeaturedImage())
                                 .into(restaurantImage);
                     } else {
-                        Glide.with(getBaseContext())
+                        Glide.with(this)
                                 .asBitmap()
-                                .load(R.mipmap.res_holder)
+                                .load(R.drawable.noimage)
                                 .into(restaurantImage);
                     }
                     restaurantName.setText(restaurant.getName());
@@ -144,7 +161,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                     restaurantRating.setBackgroundColor(Color.parseColor("#" + restaurant
                             .getUserRating().getRatingColor()));
 
-                    if (restaurant.getIsDeliveringNow().equals("1")) {
+                    if (restaurant.getIsDeliveringNow().equals(1)) {
                         restaurantIsOpenNow.setText("Open Now");
                         restaurantIsOpenNow.setTextColor(Color.parseColor("#3FBF3F"));
                     } else {
@@ -162,7 +179,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
                     restaurantCuisine.setText(restaurant.getCuisines());
 
-                    if (restaurant.getHasOnlineDelivery().equals("1")) {
+                    if (restaurant.getHasOnlineDelivery().equals(1)) {
                         Glide.with(getBaseContext())
                                 .load(R.drawable.ic_check_circle_green_30dp)
                                 .into(restaurantHasOnlineDelivery);
@@ -172,7 +189,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                                 .into(restaurantHasOnlineDelivery);
                     }
 
-                    if (restaurant.getHasTableBooking().equals("1")) {
+                    if (restaurant.getHasTableBooking().equals(1)) {
                         Glide.with(getBaseContext())
                                 .load(R.drawable.ic_check_circle_green_30dp)
                                 .into(restaurantHasTableReservation);

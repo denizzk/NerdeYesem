@@ -88,7 +88,7 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView
         } else {
             Glide.with(mContext)
                     .asBitmap()
-                    .load(R.mipmap.res_holder)
+                    .load(R.drawable.noimage)
                     .into(holder.restaurantImage);
         }
         holder.restaurantName.setText(mRestaurantNames.get(position));

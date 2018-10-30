@@ -1,4 +1,4 @@
-package com.karakaya.deniz.nerdeyesem;
+package com.karakaya.deniz.nerdeyesem.helper;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.karakaya.deniz.nerdeyesem.activity.FingerprintActivity;
 import com.karakaya.deniz.nerdeyesem.activity.MainActivity;
 
-@RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
 
     private Context context;

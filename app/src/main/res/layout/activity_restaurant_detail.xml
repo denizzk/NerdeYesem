@@ -36,7 +36,7 @@
                 android:textAlignment="center"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/Theme.AppCompat.Light"
-                app:title="@string/app_name"/>
+                app:title="@string/app_name" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -136,8 +136,8 @@
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/button_blue_border"
                         android:clickable="true"
-                        android:focusable="true"
                         android:descendantFocusability="blocksDescendants"
+                        android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center"
                         android:orientation="horizontal"
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_remove_circle_red_30dp" />
+                        android:src="@drawable/ic_check_circle_green_30dp" />
 
 
                     <TextView

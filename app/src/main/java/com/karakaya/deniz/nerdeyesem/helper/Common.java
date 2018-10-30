@@ -1,4 +1,4 @@
-package com.karakaya.deniz.nerdeyesem;
+package com.karakaya.deniz.nerdeyesem.helper;
 
 import android.Manifest;
 import android.content.Context;

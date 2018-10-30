@@ -13,7 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.karakaya.deniz.nerdeyesem.Common;
+import com.karakaya.deniz.nerdeyesem.helper.Common;
 import com.karakaya.deniz.nerdeyesem.R;
 import com.karakaya.deniz.nerdeyesem.adapter.RestaurantRecyclerViewAdapter;
 import com.karakaya.deniz.nerdeyesem.retrofit.ApiClient;
