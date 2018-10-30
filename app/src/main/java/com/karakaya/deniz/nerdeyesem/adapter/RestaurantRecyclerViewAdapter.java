@@ -1,10 +1,15 @@
 package com.karakaya.deniz.nerdeyesem.adapter;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +43,7 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView
 
     public RestaurantRecyclerViewAdapter(List<String> mRestaurantIds, List<String> mImages,
                                          List<String>
-            mRestaurantNames, List<String>
+                                                 mRestaurantNames, List<String>
                                                  mRestaurantLocations, List<String>
                                                  mRestaurantCuisines, List<String>
                                                  mRestaurantRatings, List<String>
@@ -72,6 +77,7 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         if (!mRestaurantImages.get(position).equals("")) {
@@ -92,14 +98,13 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView
         holder.restaurantRating.setBackgroundColor(Color.parseColor("#" + mRestaurantRatingColors
                 .get(position)));
         holder.restaurantAvgPrice.setText("Avg. price: " + mRestaurantCurrencies.get(position) +
-                Double
-                        .parseDouble(mRestaurantPrices
-                                .get(position)) / 2);
+                Double.parseDouble(mRestaurantPrices.get(position)) / 2);
 
         holder.parentLayout.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
-            intent.putExtra("restaurant_id", mRestaurantIds.get(position));
+            intent.putExtra("restaurant-id", mRestaurantIds.get(position));
             intent.putExtra("location", mlocation);
+
             mContext.startActivity(intent);
         });
     }

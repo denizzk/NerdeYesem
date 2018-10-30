@@ -27,12 +27,21 @@ public class ReviewsActivity extends AppCompatActivity {
     RestInterface restInterface;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    int restaurantId;
+    private int restaurantId;
+    private String restaurantName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getIntent() != null) {
+            restaurantName = getIntent().getStringExtra("restaurant-name");
+        }
+        if (!restaurantName.equals("")) {
+            setTitle(restaurantName + " Reviews");
+        }
 
         recyclerView = findViewById(R.id.reviews_recycler_view);
         recyclerView.setAdapter(adapter);
@@ -116,4 +125,5 @@ public class ReviewsActivity extends AppCompatActivity {
                 })
         );
     }
+
 }

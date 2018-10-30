@@ -69,8 +69,8 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
     @NonNull
     @Override
     public ReviewRecyclerViewAdapter.ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup
-                                                                                     parent, int
-            viewType) {
+                                                                                 parent, int
+                                                                                 viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listuser,
                 parent, false);
         ReviewRecyclerViewAdapter.ReviewViewHolder holder = new ReviewRecyclerViewAdapter
@@ -81,7 +81,7 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
     @Override
     public void onBindViewHolder(@NonNull ReviewRecyclerViewAdapter.ReviewViewHolder holder,
                                  final int
-            position) {
+                                         position) {
         if (!mUserImages.get(position).equals("")) {
             Glide.with(mContext)
                     .asBitmap()
@@ -95,7 +95,7 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
         }
         holder.userName.setText(mUserNames.get(position));
         holder.userName.setOnClickListener(v -> {
-            Intent intent =  new Intent("android.intent.action.VIEW",
+            Intent intent = new Intent("android.intent.action.VIEW",
                     Uri.parse(mUserProfileUrls.get(position)));
             mContext.startActivity(intent);
         });

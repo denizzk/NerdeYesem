@@ -25,20 +25,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.RestaurantDetailActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.MainActivity"
             android:theme="@style/GeneralNoTitle">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ReviewsActivity">
+        <activity
+            android:name=".activity.ReviewsActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.RestaurantDetailActivity">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

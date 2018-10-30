@@ -4,20 +4,21 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.karakaya.deniz.nerdeyesem.Common;
 import com.karakaya.deniz.nerdeyesem.R;
 import com.karakaya.deniz.nerdeyesem.adapter.RestaurantRecyclerViewAdapter;
 import com.karakaya.deniz.nerdeyesem.retrofit.ApiClient;
 import com.karakaya.deniz.nerdeyesem.retrofit.RestInterface;
+import com.yalantis.phoenix.PullToRefreshView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    PullToRefreshView swipeRefreshLayout;
+    LinearLayout linearLayout;
 
     Common common = new Common();
 
@@ -52,12 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         restInterface = ApiClient.getClient().create(RestInterface.class);
 
+        linearLayout=findViewById(com.karakaya.deniz.nerdeyesem.R.id.main_info);
+        linearLayout.setVisibility(View.VISIBLE);
+
         swipeRefreshLayout = findViewById(R.id.swipe_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.refresh, R.color.refresh1, R.color
-                .refresh2);
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            swipeRefreshLayout.setRefreshing(true);
-            (new Handler()).postDelayed(() -> {
+
+            linearLayout.setVisibility(View.GONE);
+            swipeRefreshLayout.postDelayed(() -> {
                 swipeRefreshLayout.setRefreshing(false);
 
                 fetchData();

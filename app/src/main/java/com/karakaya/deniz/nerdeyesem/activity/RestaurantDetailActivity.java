@@ -1,15 +1,24 @@
 package com.karakaya.deniz.nerdeyesem.activity;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class RestaurantDetailActivity extends AppCompatActivity {
 
     RestInterface restInterface;
@@ -50,10 +60,19 @@ public class RestaurantDetailActivity extends AppCompatActivity {
     int restaurantId;
     String name;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp,
+                null));
+        toolbar.setNavigationOnClickListener(v -> {
+            //onBackPressed()
+            finish();
+        });
 
         recyclerView = findViewById(R.id.user_recycler_view);
         recyclerView.setAdapter(adapter);
@@ -81,11 +100,9 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
-//        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
-
 
         if (getIntent() != null) {
-            restaurantId = Integer.parseInt(getIntent().getStringExtra("restaurant_id"));
+            restaurantId = Integer.parseInt(getIntent().getStringExtra("restaurant-id"));
         }
         if (restaurantId != 0) {
             getRestaurantDetails(restaurantId);
@@ -272,6 +289,8 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                         } else {
                             Intent intent = new Intent(getBaseContext(), ReviewsActivity.class);
                             intent.putExtra("restaurant-id", Integer.toString(restaurantId));
+                            intent.putExtra("restaurant-name", restaurantName.getText());
+
                             startActivity(intent);
                         }
                     });
